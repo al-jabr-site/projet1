@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Al Jabr | Présentation en arabe</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+      h1 {
+        text-align: center;
+        color: #0066cc;
+        margin-top: 50px;
+      }
+      .info{
+        text-align: center;
+        margin-top: 50px;
+      }
+      ul {
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 0;
+      }
+      li::before {
+        content: "\2022";
+        color: #0066cc;
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+      ol {
+        counter-reset: my-counter;
+      }
+      li {
+        counter-increment: my-counter;
+      }
+      li::before {
+        content: counter(my-counter) ".";
+        color: #0066cc;
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+      .hidden {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.5s ease-in-out;
+      }
+      .fade-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Présentation d'Al Jabr</h1>
+    <p>bouge ta souris doucement partout pour que le text apparer</p>
+    <p>Titre :</p>
+    <ul>
+      <li class="hidden">1.</li>
+      <li class="hidden">2.</li>
+      <li class="hidden">3.</li>
+    </ul>
+    <p>information :</p>
+    <ol>
+      <li class="hidden">1.text</li>
+      <li class="hidden">2.text</li>
+      <li class="hidden">3.text</li>
+    </ol>
+    <canvas id="background"></canvas>
+    <script>
+      // Get all the elements with the "hidden" class
+      const hiddenElements = document.querySelectorAll('.hidden');
+      
+      // Loop through each element and add an event listener
+      hiddenElements.forEach(element => {
+        element.addEventListener('mouseover', () => {
+          // Add the "fade-in" class to the element
+          element.classList.add('fade-in');
+        });
+      });
+    </script>
+    <script>
+      // Get the canvas element
+      const canvas = document.getElementById('background');
+      
+      // Set the canvas dimensions
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      // Get the 2D context of the canvas
+      const context = canvas.getContext('2d');
+      
+      // Set the number of circles to draw
+      const numCircles = 50;
+      
+      // Set the maximum radius of the circles
+      const maxRadius = 100;
+      
+      // Set the colors for the circles
+      const colors = ['#FF0000', '#ff9900', '#ff3399', '#33cc33'];
+      
+      // Loop through each circle and draw it on the canvas
+      for (let i = 0; i < numCircles; i++) {
+        // Set the circle radius to a random value
+        const radius = Math.random() * maxRadius;
+        
+        // Set the circle color to a random value from the colors array
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Set the circle position to a random value within the canvas dimensions
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        
+        // Draw the circle on the canvas
+        context.beginPath();
+        context.arc(x, y, radius, 0, 2 * Math.PI);
+        context.fillStyle = color;
+        context.fill();
+      }
+    </script>
+    <p class="info">site créer par Ahmed Amine Rezzouki et Adam Janah(6ème7)</p>
+  </body>
+</html>
